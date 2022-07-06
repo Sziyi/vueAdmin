@@ -19,7 +19,11 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    return response
+    if (response.data.code === 200) {
+      return response.data.data
+    }
+
+    // TODO 401 token 过期处理
   },
   (error) => {
     return Promise.reject(error)
