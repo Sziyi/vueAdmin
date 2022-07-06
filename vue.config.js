@@ -3,8 +3,8 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     open: true,
-    port: 8080,
-    host: '0.0.0.0',
+    port: 8082,
+    host:'localhost',
     https: false,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {

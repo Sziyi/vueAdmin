@@ -13,6 +13,18 @@ module.exports = {
     quotes: 'error',
     quotes: 'warn',
     quotes: 'off',
-    'space-before-function-paren': 'off'
-  }
+    'space-before-function-paren': 'off',
+    'vue/multi-word-component-names': 'off'
+  },
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }
