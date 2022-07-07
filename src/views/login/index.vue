@@ -40,17 +40,13 @@
           </el-form-item>
           <el-form-item label="验证码" prop="code">
             <el-input v-model.trim="loginForm.code" class="code" />
-            <img
-              @click="loadCaptcha"
-              class="code-img"
-              :src="codeImg"
-              alt=""
-            />
+            <img @click="loadCaptcha" class="code-img" :src="codeImg" alt="" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleLoginSubmit"
               >登录</el-button
             >
+            <el-button>获取密码</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -60,6 +56,11 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import UserApi from '../../api/user'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+const store = useStore()
+const router = useRouter()
 
 const LoginForm = ref('')
 const codeImg = ref('')
@@ -77,8 +78,9 @@ const loginFormRules = {
 
 const handleLoginSubmit = () => {
   LoginForm.value.validate(async (valid) => {
-    // if (!valid) return
-    console.log(valid)
+    if (!valid) return
+    await store.dispatch('user/login', loginForm)
+    router.push('/')
   })
 }
 

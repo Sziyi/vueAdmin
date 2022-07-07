@@ -19,6 +19,12 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
+    // console.log('rq=>', response)
+    const authorization = response.headers.authorization
+    if (authorization) {
+      console.log('---', authorization)
+      store.commit('user/SET_TOKEN', authorization)
+    }
     if (response.data.code === 200) {
       return response.data.data
     }
